@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resident Dashboard — Waste Wise</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div id="site-header-container"></div>
+
+  <main style="padding: 3rem 0;">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span class="badge badge-wet" style="margin-bottom: 0.5rem;">Household Profile</span>
+          <h1 id="dashboard-welcome" style="font-size: 2.25rem;">Welcome to your Dashboard</h1>
+          <p>Track your segregation activities, monitor impact, and review earned rewards.</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <a href="classifier.html" class="btn btn-primary">
+            <span>+ Classify Waste</span>
+          </a>
+          <a href="rewards.html" class="btn btn-outline">
+            <span>View Rewards</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Metrics Row -->
+      <div class="dashboard-metrics">
+        <div class="metric-card">
+          <div class="metric-label">Items Classified</div>
+          <div class="metric-value" id="stat-classifications">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Reward Points</div>
+          <div class="metric-value" id="stat-points" style="color: var(--color-primary);">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Rank Tier</div>
+          <div class="metric-value" id="stat-tier" style="font-size: 1.35rem; display: flex; align-items: center; gap: 0.5rem;">🍃 Starter</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Guides Completed</div>
+          <div class="metric-value" id="stat-modules">0</div>
+        </div>
+      </div>
+
+      <!-- Split: Chart & Activity Feed -->
+      <div class="dashboard-split">
+        <!-- Chart Column -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Segregation Breakdown</h3>
+          </div>
+          <div class="card-body" style="height: 320px; position: relative;">
+            <canvas id="categoryChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Recent Activity Column -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Recent Activity</h3>
+            <a href="classifier.html" style="font-size: 0.85rem; font-weight: 600;">Classify more →</a>
+          </div>
+          <div class="card-body" id="recent-activity-list" style="padding: 0;">
+            <!-- Injected via dashboard.js -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer-container"></div>
+
+  <script type="module">
+    import { initNavigation } from './js/navigation.js';
+    import { initDashboard } from './js/dashboard.js';
+
+    initNavigation();
+    initDashboard();
+  </script>
+</body>
+</html>
+

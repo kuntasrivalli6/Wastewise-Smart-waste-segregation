@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Free Account — Waste Wise</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div id="site-header-container"></div>
+
+  <main style="display: flex; align-items: center; justify-content: center; padding: 4rem 1.5rem;">
+    <div class="card" style="max-width: 480px; width: 100%; padding: 2.5rem; box-shadow: var(--shadow-xl);">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <h2 style="font-size: 1.75rem; margin-bottom: 0.5rem;">Join Waste Wise</h2>
+        <p style="font-size: 0.95rem;">Empowering your household with smart segregation tools and civic rewards.</p>
+      </div>
+
+      <div id="register-error-alert" style="display: none; background: #FEF2F2; border: 1px solid #FECACA; color: #B91C1C; padding: 0.85rem; border-radius: var(--radius-md); font-size: 0.85rem; margin-bottom: 1.25rem;"></div>
+
+      <form id="register-form">
+        <div class="form-group">
+          <label class="form-label" for="reg-name">Full Name</label>
+          <input class="form-input" type="text" id="reg-name" placeholder="Priya Sharma" required autocomplete="name">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-email">Email Address</label>
+          <input class="form-input" type="email" id="reg-email" placeholder="priya@example.in" required autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-password">Create Password</label>
+          <input class="form-input" type="password" id="reg-password" placeholder="At least 8 characters" minlength="8" required autocomplete="new-password">
+          <small class="form-text">Must be at least 8 characters long.</small>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-confirm">Confirm Password</label>
+          <input class="form-input" type="password" id="reg-confirm" placeholder="Re-enter password" minlength="8" required autocomplete="new-password">
+        </div>
+
+        <div style="margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--color-text-muted);">
+          By registering, you agree to our <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>.
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" id="btn-submit-register" style="width: 100%;">
+          Create Resident Account
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 2rem; font-size: 0.9rem;">
+        Already have an account? <a href="login.html" style="font-weight: 600;">Log In</a>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer-container"></div>
+
+  <script type="module">
+    import { initNavigation } from './js/navigation.js';
+    import { auth } from './js/auth.js';
+    import { $, showToast } from './js/utils.js';
+
+    initNavigation();
+
+    const form = $('#register-form');
+    const nameInput = $('#reg-name');
+    const emailInput = $('#reg-email');
+    const passInput = $('#reg-password');
+    const confirmInput = $('#reg-confirm');
+    const submitBtn = $('#btn-submit-register');
+    const errorAlert = $('#register-error-alert');
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorAlert.style.display = 'none';
+
+      const password = passInput.value;
+      const confirm = confirmInput.value;
+
+      if (password !== confirm) {
+        errorAlert.textContent = 'Passwords do not match. Please re-enter.';
+        errorAlert.style.display = 'block';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span class="spinner"></span> Creating Account...`;
+
+      try {
+        await auth.register(nameInput.value.trim(), emailInput.value.trim(), password);
+        showToast('Account Created!', 'Welcome to Waste Wise! You can now log your segregation activities.', 'success');
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 600);
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Create Resident Account';
+        errorAlert.textContent = err.message || 'Registration failed. Please try again.';
+        errorAlert.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
+

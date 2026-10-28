@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learn Center — Waste Wise</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div id="site-header-container"></div>
+
+  <main style="padding: 3rem 0;">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+        <span class="badge badge-wet" style="margin-bottom: 0.75rem;">Practical Civic Knowledge</span>
+        <h1 style="font-size: 2.5rem; margin-bottom: 0.75rem;">Household Waste Education Center</h1>
+        <p style="font-size: 1.1rem; max-width: 650px; margin: 0 auto;">
+          Step-by-step guides on home composting, proper plastic washing, hazardous disposal, and protecting our sanitation heroes. Earn points for every guide you finish!
+        </p>
+      </div>
+
+      <!-- Difficulty Filter Tabs -->
+      <div style="display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 2.5rem; flex-wrap: wrap;">
+        <button class="btn btn-primary btn-sm filter-btn active" data-filter="all">All Guides</button>
+        <button class="btn btn-outline btn-sm filter-btn" data-filter="beginner">Beginner</button>
+        <button class="btn btn-outline btn-sm filter-btn" data-filter="intermediate">Intermediate</button>
+      </div>
+
+      <!-- Modules Grid -->
+      <div id="learning-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+        <!-- Injected via learning.js -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Module Reader Modal -->
+  <div class="modal-overlay" id="module-modal">
+    <div class="modal-window">
+      <div class="card-header">
+        <h3 id="modal-title" style="font-size: 1.25rem;">Guide</h3>
+        <button id="modal-close" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--color-text-muted);">&times;</button>
+      </div>
+      <div class="card-body">
+        <div id="modal-meta" style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--color-text-muted); flex-wrap: wrap;"></div>
+        <div id="modal-content" style="line-height: 1.7; color: var(--color-text-main);"></div>
+      </div>
+      <div class="card-footer" style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 0.85rem; color: var(--color-text-muted);">Completing awards +25 Reward Points</span>
+        <button class="btn btn-primary" id="btn-modal-complete">Complete & Earn Points</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="site-footer-container"></div>
+
+  <script type="module">
+    import { initNavigation } from './js/navigation.js';
+    import { initLearning } from './js/learning.js';
+
+    initNavigation();
+    initLearning();
+  </script>
+</body>
+</html>
+

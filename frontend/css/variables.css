@@ -1,0 +1,72 @@
+/**
+ * Waste Wise — Design System Tokens
+ * Forest Green & Emerald Eco-Tech Identity
+ */
+:root {
+  /* Brand Color Palette */
+  --color-primary-dark: #064E3B;    /* Deep Forest Green */
+  --color-primary: #059669;         /* Vibrant Emerald */
+  --color-primary-hover: #047857;   /* Hover Emerald */
+  --color-primary-light: #D1FAE5;   /* Mint Tint */
+  --color-primary-surface: #ECFDF5; /* Subtle Mint Background */
+
+  /* Secondary & Accents */
+  --color-accent: #10B981;
+  --color-accent-amber: #D97706;
+  --color-accent-blue: #2563EB;
+  --color-accent-red: #DC2626;
+  --color-accent-purple: #7C3AED;
+  --color-accent-slate: #4B5563;
+
+  /* Standard Segregation Bin Colors */
+  --bin-wet: #10B981;        /* Green - Wet/Biodegradable */
+  --bin-dry: #2563EB;        /* Blue - Dry/Recyclable */
+  --bin-hazardous: #DC2626;  /* Red - Domestic Hazardous */
+  --bin-ewaste: #7C3AED;     /* Purple/Indigo - E-Waste */
+  --bin-sanitary: #D97706;   /* Amber - Sanitary */
+  --bin-residual: #4B5563;   /* Slate - Residual */
+
+  /* Neutrals & Surfaces */
+  --color-bg-main: #F8FAFC;
+  --color-bg-card: #FFFFFF;
+  --color-bg-alt: #F1F5F9;
+  --color-border: #E2E8F0;
+  --color-border-hover: #CBD5E1;
+
+  /* Typography Colors */
+  --color-text-main: #0F172A;
+  --color-text-muted: #64748B;
+  --color-text-subtle: #94A3B8;
+  --color-text-inverse: #FFFFFF;
+
+  /* Feedback & Status */
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+  --color-info: #3B82F6;
+
+  /* Elevation & Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.05);
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Typography Scale */
+  --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-family-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+
+  /* Spacing */
+  --container-max-width: 1200px;
+  --header-height: 72px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+

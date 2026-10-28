@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrator Dashboard — Waste Wise</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div id="site-header-container"></div>
+
+  <main style="padding: 3rem 0;">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span class="badge badge-hazardous" style="margin-bottom: 0.5rem;">Protected Administrative Portal</span>
+          <h1 style="font-size: 2.25rem;">Platform Administration</h1>
+          <p>Manage waste categories, classification rules, educational modules, and platform audit records.</p>
+        </div>
+      </div>
+
+      <!-- Overview Statistics -->
+      <div class="dashboard-metrics">
+        <div class="metric-card">
+          <div class="metric-label">Registered Citizens</div>
+          <div class="metric-value" id="metric-users">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Total Classifications</div>
+          <div class="metric-value" id="metric-classifications">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Catalog Items</div>
+          <div class="metric-value" id="metric-items">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Categories</div>
+          <div class="metric-value" id="metric-categories">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Points Credited</div>
+          <div class="metric-value" id="metric-points" style="color: var(--color-primary);">0</div>
+        </div>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; border-bottom: 1px solid var(--color-border); padding-bottom: 1rem;">
+        <button class="btn btn-primary btn-sm admin-tab-btn active" data-tab="categories">Categories</button>
+        <button class="btn btn-outline btn-sm admin-tab-btn" data-tab="items">Waste Catalog</button>
+        <button class="btn btn-outline btn-sm admin-tab-btn" data-tab="learning">Learning Guides</button>
+        <button class="btn btn-outline btn-sm admin-tab-btn" data-tab="rules">Reward Rules</button>
+        <button class="btn btn-outline btn-sm admin-tab-btn" data-tab="users">Citizens</button>
+        <button class="btn btn-outline btn-sm admin-tab-btn" data-tab="audit">Audit Trail</button>
+      </div>
+
+      <!-- 1. Categories Pane -->
+      <div class="admin-tab-pane" id="tab-categories">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3>Waste Categories</h3>
+        </div>
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Category Name</th>
+                <th>Slug</th>
+                <th>Description</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-categories-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 2. Waste Items Pane -->
+      <div class="admin-tab-pane" id="tab-items" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3>Waste Item Classification Catalog</h3>
+        </div>
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Item Name</th>
+                <th>Category</th>
+                <th>Common Aliases</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-items-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 3. Learning Content Pane -->
+      <div class="admin-tab-pane" id="tab-learning" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3>Learning Modules</h3>
+        </div>
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Difficulty</th>
+                <th>Est. Time</th>
+                <th>Reward</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-learning-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 4. Reward Rules Pane -->
+      <div class="admin-tab-pane" id="tab-rules" style="display: none;">
+        <div style="margin-bottom: 1rem;">
+          <h3>Configurable Reward Event Rules</h3>
+          <p style="font-size: 0.9rem;">Modify the points delta awarded for verified resident actions.</p>
+        </div>
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Event Type</th>
+                <th>Description</th>
+                <th>Points Awarded</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-rules-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 5. Users Pane -->
+      <div class="admin-tab-pane" id="tab-users" style="display: none;">
+        <div style="margin-bottom: 1rem;">
+          <h3>Registered Residents</h3>
+          <p style="font-size: 0.9rem;">Private authentication credentials and passwords are strictly protected and never exposed.</p>
+        </div>
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Full Name</th>
+                <th>System Role</th>
+                <th>Joined Date</th>
+              </tr>
+            </thead>
+            <tbody id="admin-users-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 6. Audit Logs Pane -->
+      <div class="admin-tab-pane" id="tab-audit" style="display: none;">
+        <div style="margin-bottom: 1rem;">
+          <h3>Administrative Audit Trail</h3>
+          <p style="font-size: 0.9rem;">Immutable log of administrative interventions and content mutations.</p>
+        </div>
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Action</th>
+                <th>Entity Type</th>
+                <th>Metadata</th>
+                <th>Timestamp</th>
+              </tr>
+            </thead>
+            <tbody id="admin-audit-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer-container"></div>
+
+  <script type="module">
+    import { initNavigation } from './js/navigation.js';
+    import { initAdmin } from './js/admin.js';
+
+    initNavigation();
+    initAdmin();
+  </script>
+</body>
+</html>
+

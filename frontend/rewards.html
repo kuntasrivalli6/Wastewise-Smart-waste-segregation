@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Points & Rewards — Waste Wise</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div id="site-header-container"></div>
+
+  <main style="padding: 3rem 0;">
+    <div class="container">
+      <div style="margin-bottom: 2.5rem;">
+        <span class="badge badge-wet" style="margin-bottom: 0.5rem;">Civic Habit Ledger</span>
+        <h1 style="font-size: 2.25rem;">Points & Achievements</h1>
+        <p>Every responsible waste segregation choice earns verified points in your personal ledger.</p>
+      </div>
+
+      <!-- Current Tier Progress Banner -->
+      <div class="tier-progress-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <span style="text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem; font-weight: 700; color: #A7F3D0;">Current Status</span>
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-top: 0.25rem;">
+              <span id="user-tier-badge" style="font-size: 2.5rem;">🍃</span>
+              <h2 id="user-tier-name" style="font-size: 2rem; margin: 0;">Green Starter</h2>
+            </div>
+          </div>
+          <div style="text-align: right;">
+            <span style="font-size: 0.85rem; color: #A7F3D0;">Total Balance</span>
+            <div style="font-size: 2.75rem; font-weight: 800; line-height: 1;">
+              <span id="user-total-points">0</span> <span style="font-size: 1.25rem; font-weight: 600;">PTS</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="tier-progress-fill" style="width: 0%;"></div>
+        </div>
+
+        <p id="next-tier-info" style="font-size: 0.95rem; margin: 0; color: #D1FAE5;"></p>
+      </div>
+
+      <!-- Tier Roadmap Cards -->
+      <div style="margin-bottom: 3.5rem;">
+        <h3 style="margin-bottom: 1.25rem;">Achievement Ranks</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem;">
+          <div class="card" style="padding: 1.5rem; text-align: center;">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🍃</div>
+            <h4>Green Starter</h4>
+            <p style="font-size: 0.85rem; color: var(--color-text-muted);">0 – 99 Points</p>
+            <small style="color: var(--color-primary);">Begins segregation journey</small>
+          </div>
+          <div class="card" style="padding: 1.5rem; text-align: center;">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌱</div>
+            <h4>Eco Warrior</h4>
+            <p style="font-size: 0.85rem; color: var(--color-text-muted);">100 – 299 Points</p>
+            <small style="color: var(--color-primary);">Consistent daily sorter</small>
+          </div>
+          <div class="card" style="padding: 1.5rem; text-align: center;">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌍</div>
+            <h4>Earth Guardian</h4>
+            <p style="font-size: 0.85rem; color: var(--color-text-muted);">300 – 599 Points</p>
+            <small style="color: var(--color-primary);">Community role model</small>
+          </div>
+          <div class="card" style="padding: 1.5rem; text-align: center;">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏆</div>
+            <h4>Sustainability Champion</h4>
+            <p style="font-size: 0.85rem; color: var(--color-text-muted);">600+ Points</p>
+            <small style="color: var(--color-primary);">Master of zero-waste living</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two Tables: Ledger & Rules -->
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+        <!-- Auditable Ledger Table -->
+        <div>
+          <h3 style="margin-bottom: 1rem;">Transaction Ledger</h3>
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Event</th>
+                  <th>Points</th>
+                  <th>Idempotency Reference</th>
+                  <th>Timestamp</th>
+                </tr>
+              </thead>
+              <tbody id="ledger-tbody">
+                <!-- Injected via rewards.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Rules Table -->
+        <div>
+          <h3 style="margin-bottom: 1rem;">How to Earn</h3>
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Action</th>
+                  <th>Guidance</th>
+                  <th>Award</th>
+                </tr>
+              </thead>
+              <tbody id="rules-tbody">
+                <!-- Injected via rewards.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer-container"></div>
+
+  <script type="module">
+    import { initNavigation } from './js/navigation.js';
+    import { initRewards } from './js/rewards.js';
+
+    initNavigation();
+    initRewards();
+  </script>
+</body>
+</html>
+

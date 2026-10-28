@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Waste Wise</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div id="site-header-container"></div>
+
+  <main style="padding: 4rem 0;">
+    <div class="container" style="max-width: 800px;">
+      <span class="badge badge-wet" style="margin-bottom: 0.5rem;">Data Protection & Trust</span>
+      <h1 style="font-size: 2.25rem; margin-bottom: 1.5rem;">Privacy Policy</h1>
+
+      <div class="card" style="padding: 2.5rem; line-height: 1.8;">
+        <h3>1. Data Minimization</h3>
+        <p>Waste Wise is dedicated to environmental education. We only collect the minimal personal data required to administer your resident account: your name, email address, and records of waste classifications and completed learning modules that you choose to log.</p>
+
+        <h3 style="margin-top: 1.5rem;">2. What We Never Collect</h3>
+        <p>We do not request, track, or store financial credentials, government identity numbers (such as Aadhaar or PAN), precise GPS locations, or contacts. Waste classification queries submitted by guests are processed in-memory without persistent user tracking.</p>
+
+        <h3 style="margin-top: 1.5rem;">3. Data Security & Storage</h3>
+        <p>All sensitive user identities and password hashes are managed strictly through Supabase Auth, protected by PostgreSQL Row Level Security (RLS) policies. User-specific activity histories can only be accessed by the authenticated account owner or authorized municipal system administrators.</p>
+
+        <h3 style="margin-top: 1.5rem;">4. Account Deletion & Right to be Forgotten</h3>
+        <p>Residents may request complete deletion of their account and associated ledger records at any time by contacting support or initiating an account removal request. Deleting an account cascades to permanently remove all personal classification records.</p>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer-container"></div>
+
+  <script type="module">
+    import { initNavigation } from './js/navigation.js';
+    initNavigation();
+  </script>
+</body>
+</html>
+

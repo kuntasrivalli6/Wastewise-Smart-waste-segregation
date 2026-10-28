@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In — Waste Wise</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div id="site-header-container"></div>
+
+  <main style="display: flex; align-items: center; justify-content: center; padding: 4rem 1.5rem;">
+    <div class="card" style="max-width: 440px; width: 100%; padding: 2.5rem; box-shadow: var(--shadow-xl);">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <h2 style="font-size: 1.75rem; margin-bottom: 0.5rem;">Resident Login</h2>
+        <p style="font-size: 0.95rem;">Access your segregation history, rewards, and personal environmental impact.</p>
+      </div>
+
+      <div id="login-error-alert" style="display: none; background: #FEF2F2; border: 1px solid #FECACA; color: #B91C1C; padding: 0.85rem; border-radius: var(--radius-md); font-size: 0.85rem; margin-bottom: 1.25rem;"></div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label" for="login-email">Email Address</label>
+          <input class="form-input" type="email" id="login-email" placeholder="priya@example.in" required autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.45rem;">
+            <label class="form-label" for="login-password" style="margin-bottom: 0;">Password</label>
+            <button type="button" id="btn-toggle-password" style="background: none; border: none; font-size: 0.8rem; color: var(--color-primary); cursor: pointer;">Show</button>
+          </div>
+          <input class="form-input" type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" id="btn-submit-login" style="width: 100%; margin-top: 1rem;">
+          Log In
+        </button>
+      </form>
+
+      <!-- Quick Test Accounts for Instant Verification -->
+      <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border); text-align: center;">
+        <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); font-weight: 600;">Instant Demo Logins</span>
+        <div style="display: flex; gap: 0.75rem; margin-top: 0.75rem;">
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-demo-user" style="flex: 1;">Resident Demo</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-demo-admin" style="flex: 1;">Admin Demo</button>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 2rem; font-size: 0.9rem;">
+        Don't have an account? <a href="register.html" style="font-weight: 600;">Sign Up</a>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer-container"></div>
+
+  <script type="module">
+    import { initNavigation } from './js/navigation.js';
+    import { auth } from './js/auth.js';
+    import { $, showToast } from './js/utils.js';
+
+    initNavigation();
+
+    // Redirection if already authenticated
+    if (auth.isAuthenticated()) {
+      const user = auth.getUser();
+      window.location.href = user.role === 'admin' ? 'admin.html' : 'dashboard.html';
+    }
+
+    const form = $('#login-form');
+    const emailInput = $('#login-email');
+    const passInput = $('#login-password');
+    const submitBtn = $('#btn-submit-login');
+    const errorAlert = $('#login-error-alert');
+    const togglePassBtn = $('#btn-toggle-password');
+
+    // Password visibility toggle
+    togglePassBtn?.addEventListener('click', () => {
+      if (passInput.type === 'password') {
+        passInput.type = 'text';
+        togglePassBtn.textContent = 'Hide';
+      } else {
+        passInput.type = 'password';
+        togglePassBtn.textContent = 'Show';
+      }
+    });
+
+    // Form submission
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorAlert.style.display = 'none';
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span class="spinner"></span> Signing In...`;
+
+      try {
+        await auth.login(emailInput.value.trim(), passInput.value);
+        showToast('Welcome back!', 'Login successful.', 'success');
+        
+        const params = new URLSearchParams(window.location.search);
+        const redirect = params.get('redirect') || (auth.isAdmin() ? 'admin.html' : 'dashboard.html');
+        setTimeout(() => {
+          window.location.href = redirect;
+        }, 500);
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Log In';
+        errorAlert.textContent = err.message || 'Invalid email or password.';
+        errorAlert.style.display = 'block';
+      }
+    });
+
+    // Quick demo buttons
+    $('#btn-demo-user')?.addEventListener('click', () => {
+      emailInput.value = 'citizen@wastewise.in';
+      passInput.value = 'DemoPass123!';
+      form.requestSubmit();
+    });
+
+    $('#btn-demo-admin')?.addEventListener('click', () => {
+      emailInput.value = 'admin@wastewise.in';
+      passInput.value = 'AdminPass123!';
+      form.requestSubmit();
+    });
+  </script>
+</body>
+</html>
+
